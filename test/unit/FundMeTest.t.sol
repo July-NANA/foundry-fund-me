@@ -3,8 +3,8 @@ pragma solidity ^0.8.24;
 
 import {Test} from "forge-std/Test.sol";
 import "forge-std/console.sol";
-import {FundMe} from "../src/FundMe.sol";
-import {DeployFundMe} from "../script/DeployFundMe.s.sol";
+import {FundMe} from "src/FundMe.sol";
+import {DeployFundMe} from "script/DeployFundMe.s.sol";
 
 contract FundMeTest is Test {
     FundMe fundMe;
@@ -43,7 +43,7 @@ contract FundMeTest is Test {
         fundMe.fund{value: SEND_VALUE}();
         vm.stopPrank();
 
-        uint gasStart = gasleft();
+        // uint gasStart = gasleft();
         uint256 amountFunded = fundMe.getAddressToAmountFunded(USER);
         assertEq(amountFunded, SEND_VALUE);
     }
