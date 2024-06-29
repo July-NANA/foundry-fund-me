@@ -63,3 +63,8 @@ fund:
 
 withdraw:
 	@forge script script/Interactions.s.sol:WithdrawFundMe --sender $(SENDER_ADDRESS) $(NETWORK_ARGS)
+
+
+# forge verify-contract 0x6e94BDd56D9CcE285C23658d4e32483a6848696c src/FundMe.sol:FundMe --chain-id 11155111 --verifier sourcify
+# forge verify-check 0x6e94BDd56D9CcE285C23658d4e32483a6848696c   --chain-id 11155111 --verifier sourcify
+# forge script script deploySimpleStorage.s.sol --rpc_url=$Sepolia_RPC_URL --private-key=$private_key --broadcast

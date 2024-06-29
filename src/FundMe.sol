@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-// Note: The AggregatorV3Interface might be at a different location than what was in the video!
 import {PriceConverter} from "./PriceConverter.sol";
 import "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 import {Script, console} from "forge-std/Script.sol";
-
 
 error NotOwner();
 
@@ -15,21 +13,22 @@ contract FundMe {
     mapping(address => uint256) private s_addressToAmountFunded;
     address[] private s_funders;
 
-    // Could we make this constant?  /* hint: no! We should make it immutable! */
-    address public /* immutable */ i_owner;
+    address public immutable i_owner;
     uint256 public constant MINIMUM_USD = 5 * 10 ** 18;
     AggregatorV3Interface private s_priceFeed;
 
     constructor(address _priceFeed) {
         i_owner = msg.sender;
-        s_priceFeed=AggregatorV3Interface(_priceFeed);
-
+        s_priceFeed = AggregatorV3Interface(_priceFeed);
     }
 
     function fund() public payable {
-        console.log("this address:",address(this));
-        console.log("real funder",msg.sender);
-        require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");
+        console.log("this address:", address(this));
+        console.log("real funder", msg.sender);
+        require(
+            msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD,
+            "You need to spend more ETH!"
+        );
         // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         s_addressToAmountFunded[msg.sender] += msg.value;
         s_funders.push(msg.sender);
@@ -37,14 +36,18 @@ contract FundMe {
 
     modifier onlyOwner() {
         // require(msg.sender == owner);
-        console.log("Withdraw by :",msg.sender);
+        console.log("Withdraw by :", msg.sender);
         if (msg.sender != i_owner) revert NotOwner();
         _;
     }
 
     function withdraw() public onlyOwner {
-        console.log("this address:",address(this));
-        for (uint256 funderIndex = 0; funderIndex < s_funders.length; funderIndex++) {
+        console.log("this address:", address(this));
+        for (
+            uint256 funderIndex = 0;
+            funderIndex < s_funders.length;
+            funderIndex++
+        ) {
             address funder = s_funders[funderIndex];
             s_addressToAmountFunded[funder] = 0;
         }
@@ -57,33 +60,28 @@ contract FundMe {
         // require(sendSuccess, "Send failed");
 
         // call
-        (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}("");
+        (bool callSuccess, ) = payable(msg.sender).call{
+            value: address(this).balance
+        }("");
         require(callSuccess, "Call failed");
     }
 
     function cheaperWithdraw() public onlyOwner {
         address[] memory funders = s_funders;
         // mappings can't be in memory, sorry!
-        for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) {
+        for (
+            uint256 funderIndex = 0;
+            funderIndex < funders.length;
+            funderIndex++
+        ) {
             address funder = funders[funderIndex];
             s_addressToAmountFunded[funder] = 0;
         }
         s_funders = new address[](0);
         // payable(msg.sender).transfer(address(this).balance);
-        (bool success,) = i_owner.call{value: address(this).balance}("");
+        (bool success, ) = i_owner.call{value: address(this).balance}("");
         require(success);
     }
-    // Explainer from: https://solidity-by-example.org/fallback/
-    // Ether is sent to contract
-    //      is msg.data empty?
-    //          /   \
-    //         yes  no
-    //         /     \
-    //    receive()?  fallback()
-    //     /   \
-    //   yes   no
-    //  /        \
-    //receive()  fallback()
 
     fallback() external payable {
         fund();
@@ -93,17 +91,14 @@ contract FundMe {
         fund();
     }
 
-
-        /**
-     * Getter Functions
-     */
-
     /**
      * @notice Gets the amount that an address has funded
      *  @param fundingAddress the address of the funder
      *  @return the amount funded
      */
-    function getAddressToAmountFunded(address fundingAddress) public view returns (uint256) {
+    function getAddressToAmountFunded(
+        address fundingAddress
+    ) public view returns (uint256) {
         return s_addressToAmountFunded[fundingAddress];
     }
 
@@ -123,12 +118,3 @@ contract FundMe {
         return s_priceFeed;
     }
 }
-
-// Concepts we didn't cover yet (will cover in later sections)
-// 1. Enum
-// 2. Events
-// 3. Try / Catch
-// 4. Function Selector
-// 5. abi.encode / decode
-// 6. Hash with keccak256
-// 7. Yul / Assembly

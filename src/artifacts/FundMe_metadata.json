@@ -1,0 +1,255 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_priceFeed",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "NotOwner",
+				"type": "error"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
+				"inputs": [],
+				"name": "MINIMUM_USD",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cheaperWithdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "fund",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "fundingAddress",
+						"type": "address"
+					}
+				],
+				"name": "getAddressToAmountFunded",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "getFunder",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getPriceFeed",
+				"outputs": [
+					{
+						"internalType": "contract AggregatorV3Interface",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getVersion",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "i_owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"getAddressToAmountFunded(address)": {
+					"params": {
+						"fundingAddress": "the address of the funder"
+					},
+					"returns": {
+						"_0": "the amount funded"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"getAddressToAmountFunded(address)": {
+					"notice": "Gets the amount that an address has funded"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/FundMe.sol": "FundMe"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol": {
+			"keccak256": "0x257a8d28fa83d3d942547c8e129ef465e4b5f3f31171e7be4739a4c98da6b4f0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6d39e11b1dc7b9b8ccdabbc9be442ab7cda4a81c748f57e316dcb1bcb4a28bf9",
+				"dweb:/ipfs/QmaG6vz6W6iEUBsbHSBob5mdcitYxWjoygxREHpsJHfWrS"
+			]
+		},
+		"forge-std/Script.sol": {
+			"keccak256": "0x24ed91a7f3ba4ee9c82940f0d2d9d71fc4adfb98b3874715cb565e92574f7f11",
+			"license": "Unlicense",
+			"urls": [
+				"bzz-raw://9dc5e2d582d2d55f1b62eb156848eb572b7e8bde6e22dc6d30b84a236967a043",
+				"dweb:/ipfs/QmPuggLovwKfXN6B7GkKnCjgAotXKFVkEvei79BEkKnKML"
+			]
+		},
+		"forge-std/Vm.sol": {
+			"keccak256": "0xbed7e29b63ea925a59762400e383856c62184e00123a7b90937423c143abc02f",
+			"license": "Unlicense",
+			"urls": [
+				"bzz-raw://9f41c29f491626269bd31692f24ed1fb15e9a81b31141c19595dfc41bd71edf0",
+				"dweb:/ipfs/QmRHwpxs4RoMEyLwQDzQQMFjEDNfCDWp1VhtVsKLsXUFYM"
+			]
+		},
+		"forge-std/console.sol": {
+			"keccak256": "0x91d5413c2434ca58fd278b6e1e79fd98d10c83931cc2596a6038eee4daeb34ba",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://91ccea707361e48b9b7a161fe81f496b9932bc471e9c4e4e1e9c283f2453cc70",
+				"dweb:/ipfs/QmcB66sZhQ6Kz7MUHcLE78YXRUZxoZnnxZjN6yATsbB2ec"
+			]
+		},
+		"forge-std/console2.sol": {
+			"keccak256": "0xbeb823fcdb356244a83aaccdf828ad019ecc1ffaa3dff18e624fc6d5714ea671",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4cbe9400340e5f9ec55e2aff3bad1c15fa3afbbe37e80800e6f3fed2ad26854f",
+				"dweb:/ipfs/QmdJBABsuXkvWxVzEyGXsTE3vyfBPXDdw5xvvtUz3JeoYW"
+			]
+		},
+		"src/FundMe.sol": {
+			"keccak256": "0xfe8293f59ae20867b0e065318748aafa98f31e9e4e31aba9503d4bb2ef533434",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c6aff48d84a981c9e2df5383c37e6730cf1593fcf28a3b838c16f774514d4dd7",
+				"dweb:/ipfs/QmP4ryZkU9d4uJ2FBnQhVAeQiSvWbAA2aop8fHkzjzCPyf"
+			]
+		},
+		"src/PriceConverter.sol": {
+			"keccak256": "0x52c0473ed7b468c742e06d926dce9ee281f29adc58ac462c262da26ea810a028",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0d984018543aaa392e6fab2b318d3b65749b3bf54b79c7ae526d285d4bd05fbe",
+				"dweb:/ipfs/QmNd8Lg1FX7uyMf3oZ3Ly7vkLRJpCjTmnJAPk2GtQzbhJn"
+			]
+		}
+	},
+	"version": 1
+}
